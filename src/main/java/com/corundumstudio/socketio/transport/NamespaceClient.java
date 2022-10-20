@@ -17,12 +17,10 @@ package com.corundumstudio.socketio.transport;
 
 import java.net.SocketAddress;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.HandshakeData;
@@ -32,6 +30,8 @@ import com.corundumstudio.socketio.handler.ClientHead;
 import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.protocol.Packet;
 import com.corundumstudio.socketio.protocol.PacketType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NamespaceClient implements SocketIOClient {
 
@@ -173,8 +173,18 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
+    public void joinRooms(Set<String> rooms) {
+        namespace.joinRooms(rooms, getSessionId());
+    }
+
+    @Override
     public void leaveRoom(String room) {
         namespace.leaveRoom(room, getSessionId());
+    }
+
+    @Override
+    public void leaveRooms(Set<String> rooms) {
+        namespace.leaveRooms(rooms, getSessionId());
     }
 
     @Override

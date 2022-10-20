@@ -15,12 +15,12 @@
  */
 package com.corundumstudio.socketio;
 
+import com.corundumstudio.socketio.protocol.Packet;
+import com.corundumstudio.socketio.store.Store;
+
 import java.net.SocketAddress;
 import java.util.Set;
 import java.util.UUID;
-
-import com.corundumstudio.socketio.protocol.Packet;
-import com.corundumstudio.socketio.store.Store;
 
 
 /**
@@ -95,12 +95,26 @@ public interface SocketIOClient extends ClientOperations, Store {
      */
     void joinRoom(String room);
 
+  /**
+   * Join client to rooms
+   *
+   * @param rooms - names of rooms
+   */
+  void joinRooms(Set<String> rooms);
+
     /**
-     * Join client to room
+     * Leave client from room
      *
      * @param room - name of room
      */
     void leaveRoom(String room);
+
+  /**
+   * Leave client from rooms
+   *
+   * @param rooms - names of rooms
+   */
+  void leaveRooms(Set<String> rooms);
 
     /**
      * Get all rooms a client is joined in.
